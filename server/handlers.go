@@ -234,7 +234,7 @@ func (server *Server) handleIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func (server *Server) handleMain(w http.ResponseWriter, r *http.Request) {
-	path := "terminal"
+	path := "/terminal/"
 	customPath := os.Getenv("TERMINAL_PATH")
 	if len(customPath) > 0 {
 		path = customPath

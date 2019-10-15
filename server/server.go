@@ -109,7 +109,7 @@ func (server *Server) Run(ctx context.Context, options ...RunOption) error {
 	path := "/terminal/"
 	customPath := os.Getenv("TERMINAL_PATH")
 	if len(customPath) > 0 {
-		path = "/" + customPath + "/"
+		path = customPath
 	}
 
 	if server.options.EnableRandomUrl {
@@ -212,7 +212,9 @@ func (server *Server) setupHandlers(ctx context.Context, cancel context.CancelFu
 	siteMux.HandleFunc(pathPrefix+"config.js", server.handleConfig)
 	siteMux.HandleFunc("/api/kube-config", server.handleKubeConfigApi)
 	siteMux.HandleFunc("/api/kube-token", server.handleKubeConfigApi)
-	siteMux.HandleFunc("/", server.handleMain)
+	if len(os.Getenv("TERMINAL_PATH")) > 0 {
+		siteMux.HandleFunc("/", server.handleMain)
+	}
 	siteHandler := http.Handler(siteMux)
 
 	if server.options.EnableBasicAuth {
