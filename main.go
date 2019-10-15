@@ -94,7 +94,7 @@ func main() {
 
 		ctx, cancel := context.WithCancel(context.Background())
 		gCtx, gCancel := context.WithCancel(context.Background())
-
+		log.Println("Welcome to use webkubectl.")
 		log.Printf("GoTTY is starting with command: %s", strings.Join(args, " "))
 
 		errs := make(chan error, 1)
