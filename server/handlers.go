@@ -5,16 +5,23 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/patrickmn/go-cache"
+	"github.com/yudai/gotty/pkg/randomstring"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
+	"strings"
 	"sync/atomic"
+	"time"
 
 	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
 
 	"github.com/yudai/gotty/webtty"
 )
+
+var tokenCache = cache.New(5*time.Minute, 10*time.Minute)
 
 func (server *Server) generateHandleWS(ctx context.Context, cancel context.CancelFunc, counter *counter) http.HandlerFunc {
 	once := new(int64)
@@ -114,7 +121,25 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 	if err != nil {
 		return errors.Wrapf(err, "failed to parse arguments")
 	}
+	windowTitle := ""
 	params := query.Query()
+	if len(params.Get("token")) > 0 {
+		cachedObject, found := tokenCache.Get(params.Get("token"))
+		cachedKey := params.Get("token")
+		if found {
+
+			kubeConfigRequest, ok := cachedObject.(KubeConfigRequest)
+			if ok {
+				windowTitle = kubeConfigRequest.Alias
+				params.Set("token", kubeConfigRequest.KubeConfig)
+			} else {
+				return errors.Wrapf(err, "Internal Error")
+			}
+			tokenCache.Delete(cachedKey)
+		} else {
+			return errors.Wrapf(err, "Invalid Token")
+		}
+	}
 	var slave Slave
 	slave, err = server.factory.New(params)
 	if err != nil {
@@ -134,11 +159,15 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 	)
 
 	titleBuf := new(bytes.Buffer)
+
 	err = server.titleTemplate.Execute(titleBuf, titleVars)
 	if err != nil {
 		return errors.Wrapf(err, "failed to fill window title template")
 	}
-
+	if len(windowTitle) > 0 {
+		titleBuf.Reset()
+		titleBuf.WriteString(windowTitle)
+	}
 	opts := []webtty.Option{
 		webtty.WithWindowTitle(titleBuf.Bytes()),
 	}
@@ -232,4 +261,43 @@ func (server *Server) titleVariables(order []string, varUnits map[string]map[str
 	}
 
 	return titleVars
+}
+
+func (server *Server) handleKubeConfigApi(w http.ResponseWriter, r *http.Request) {
+	result := ApiResponse{
+		Success: false,
+	}
+	w.Header().Set("Content-Type", "application/json;charset=utf-8")
+	if !strings.EqualFold(r.Method, "POST") {
+		result.Message = "Method Not Allowed"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(405)
+		return
+	}
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Printf("read body err, %v\n", err)
+		result.Message = "Invalid Request Body"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(406)
+		return
+	}
+	var requst KubeConfigRequest
+	if err = json.Unmarshal(body, &requst); err != nil {
+		fmt.Printf("Unmarshal err, %v\n", err)
+		result.Message = "Invalid Request Body"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(406)
+		return
+	}
+	fmt.Printf("%+v", requst)
+	token := randomstring.Generate(20)
+	tokenCache.Add(token, requst, cache.DefaultExpiration)
+	result.Success = true
+	result.Token = token
+	json.NewEncoder(w).Encode(result)
+}
+
+func (server *Server) handleKubeTokenApi(w http.ResponseWriter, r *http.Request) {
+	// TODO
 }
