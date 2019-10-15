@@ -7,7 +7,7 @@ type ApiResponse struct {
 }
 
 type KubeConfigRequest struct {
-	Alias      string `json:"alias"`
+	Name       string `json:"name"`
 	KubeConfig string `json:"kubeConfig"`
 }
 

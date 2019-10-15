@@ -123,6 +123,7 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 	}
 	windowTitle := ""
 	params := query.Query()
+	params.Del("arg")
 	if len(params.Get("token")) > 0 {
 		cachedObject, found := tokenCache.Get(params.Get("token"))
 		cachedKey := params.Get("token")
@@ -130,8 +131,8 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 
 			kubeConfigRequest, ok := cachedObject.(KubeConfigRequest)
 			if ok {
-				windowTitle = kubeConfigRequest.Alias
-				params.Set("token", kubeConfigRequest.KubeConfig)
+				windowTitle = kubeConfigRequest.Name
+				params.Set("arg", kubeConfigRequest.KubeConfig)
 			} else {
 				return errors.Wrapf(err, "Internal Error")
 			}
@@ -139,6 +140,8 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 		} else {
 			return errors.Wrapf(err, "Invalid Token")
 		}
+	} else {
+		return errors.New("No token provided")
 	}
 	var slave Slave
 	slave, err = server.factory.New(params)
