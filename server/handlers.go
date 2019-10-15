@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -232,6 +233,26 @@ func (server *Server) handleIndex(w http.ResponseWriter, r *http.Request) {
 	w.Write(indexBuf.Bytes())
 }
 
+func (server *Server) handleMain(w http.ResponseWriter, r *http.Request) {
+	path := "terminal"
+	customPath := os.Getenv("TERMINAL_PATH")
+	if len(customPath) > 0 {
+		path = customPath
+	}
+	indexVars := map[string]interface{}{
+		"terminal_path": path,
+	}
+
+	indexBuf := new(bytes.Buffer)
+	err := server.mainTemplate.Execute(indexBuf, indexVars)
+	if err != nil {
+		http.Error(w, "Internal Server Error", 500)
+		return
+	}
+
+	w.Write(indexBuf.Bytes())
+}
+
 func (server *Server) handleAuthToken(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/javascript")
 	// @TODO hashing?
@@ -293,8 +314,8 @@ func (server *Server) handleKubeConfigApi(w http.ResponseWriter, r *http.Request
 		w.WriteHeader(406)
 		return
 	}
-	fmt.Printf("%+v", requst)
-	token := randomstring.Generate(20)
+	//fmt.Printf("%+v", requst)
+	token := randomstring.Generate(30)
 	tokenCache.Add(token, requst, cache.DefaultExpiration)
 	result.Success = true
 	result.Token = token

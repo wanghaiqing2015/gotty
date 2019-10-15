@@ -9,6 +9,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
 	"regexp"
 	noesctmpl "text/template"
 	"time"
@@ -30,6 +31,7 @@ type Server struct {
 
 	upgrader      *websocket.Upgrader
 	indexTemplate *template.Template
+	mainTemplate  *template.Template
 	titleTemplate *noesctmpl.Template
 }
 
@@ -50,6 +52,15 @@ func New(factory Factory, options *Options) (*Server, error) {
 	indexTemplate, err := template.New("index").Parse(string(indexData))
 	if err != nil {
 		panic("index template parse failed") // must be valid
+	}
+
+	mainData, err := Asset("static/main.html")
+	if err != nil {
+		panic("main not found") // must be in bindata
+	}
+	mainTemplate, err := template.New("main").Parse(string(mainData))
+	if err != nil {
+		panic("main template parse failed") // must be valid
 	}
 
 	titleTemplate, err := noesctmpl.New("title").Parse(options.TitleFormat)
@@ -79,6 +90,7 @@ func New(factory Factory, options *Options) (*Server, error) {
 			CheckOrigin:     originChekcer,
 		},
 		indexTemplate: indexTemplate,
+		mainTemplate:  mainTemplate,
 		titleTemplate: titleTemplate,
 	}, nil
 }
@@ -94,8 +106,12 @@ func (server *Server) Run(ctx context.Context, options ...RunOption) error {
 	}
 
 	counter := newCounter(time.Duration(server.options.Timeout) * time.Second)
+	path := "/terminal/"
+	customPath := os.Getenv("TERMINAL_PATH")
+	if len(customPath) > 0 {
+		path = "/" + customPath + "/"
+	}
 
-	path := "/"
 	if server.options.EnableRandomUrl {
 		path = "/" + randomstring.Generate(server.options.RandomUrlLength) + "/"
 	}
@@ -186,6 +202,7 @@ func (server *Server) setupHandlers(ctx context.Context, cancel context.CancelFu
 	)
 
 	var siteMux = http.NewServeMux()
+
 	siteMux.HandleFunc(pathPrefix, server.handleIndex)
 	siteMux.Handle(pathPrefix+"js/", http.StripPrefix(pathPrefix, staticFileHandler))
 	siteMux.Handle(pathPrefix+"favicon.png", http.StripPrefix(pathPrefix, staticFileHandler))
@@ -193,8 +210,9 @@ func (server *Server) setupHandlers(ctx context.Context, cancel context.CancelFu
 
 	siteMux.HandleFunc(pathPrefix+"auth_token.js", server.handleAuthToken)
 	siteMux.HandleFunc(pathPrefix+"config.js", server.handleConfig)
-	siteMux.HandleFunc(pathPrefix+"api/kube-config", server.handleKubeConfigApi)
-	siteMux.HandleFunc(pathPrefix+"api/kube-token", server.handleKubeConfigApi)
+	siteMux.HandleFunc("/api/kube-config", server.handleKubeConfigApi)
+	siteMux.HandleFunc("/api/kube-token", server.handleKubeConfigApi)
+	siteMux.HandleFunc("/", server.handleMain)
 	siteHandler := http.Handler(siteMux)
 
 	if server.options.EnableBasicAuth {

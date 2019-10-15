@@ -7,7 +7,7 @@ gotty: main.go server/*.go webtty/*.go backend/*.go Makefile
 	godep go build ${BUILD_OPTIONS}
 
 .PHONY: asset
-asset: bindata/static/js/gotty-bundle.js bindata/static/index.html bindata/static/favicon.png bindata/static/css/index.css bindata/static/css/xterm.css bindata/static/css/xterm_customize.css
+asset: bindata/static/js/gotty-bundle.js bindata/static/index.html bindata/static/main.html bindata/static/css/main.css bindata/static/js/main.js bindata/static/favicon.png bindata/static/css/index.css bindata/static/css/xterm.css bindata/static/css/xterm_customize.css
 	go-bindata -prefix bindata -pkg server -ignore=\\.gitkeep -o server/asset.go bindata/...
 	gofmt -w server/asset.go
 
@@ -23,6 +23,9 @@ bindata/static: bindata
 bindata/static/index.html: bindata/static resources/index.html
 	cp resources/index.html bindata/static/index.html
 
+bindata/static/main.html: bindata/static resources/main.html
+	cp resources/main.html bindata/static/main.html
+
 bindata/static/favicon.png: bindata/static resources/favicon.png
 	cp resources/favicon.png bindata/static/favicon.png
 
@@ -33,11 +36,17 @@ bindata/static/js: bindata/static
 bindata/static/js/gotty-bundle.js: bindata/static/js js/dist/gotty-bundle.js
 	cp js/dist/gotty-bundle.js bindata/static/js/gotty-bundle.js
 
+bindata/static/js/main.js: bindata/static/js resources/main.js
+	cp resources/main.js bindata/static/js/main.js
+
 bindata/static/css: bindata/static
 	mkdir -p bindata/static/css
 
 bindata/static/css/index.css: bindata/static/css resources/index.css
 	cp resources/index.css bindata/static/css/index.css
+
+bindata/static/css/main.css: bindata/static/css resources/main.css
+	cp resources/main.css bindata/static/css/main.css
 
 bindata/static/css/xterm_customize.css: bindata/static/css resources/xterm_customize.css
 	cp resources/xterm_customize.css bindata/static/css/xterm_customize.css
