@@ -20,11 +20,7 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         reader.readAsText(f || "");
         reader.onload = function () {
             $(".custom-file-label").text(f.name);
-            $scope.$apply(function () {
-                    $scope.item.key = PREFIX + $scope.item.name;
-                    $scope.item.kubeConfig = window.btoa(this.result);
-                }
-            );
+            $scope.item.kubeConfig = window.btoa(this.result);
         }
     });
 
@@ -40,8 +36,10 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
 
     $scope.connect = function (item) {
         const HOST = "http://127.0.0.1:8080";
-        const URL = HOST + "/api/kube-config";
-        return $http.post(URL, item).then(function (response) {
+        const CONFIG_URL = HOST + "/api/kube-config";
+        const TOKEN_URL = HOST + "/api/kube-token";
+        let url = item.type === "config" ? CONFIG_URL : TOKEN_URL;
+        return $http.post(url, item).then(function (response) {
             if (response.data.success) {
                 let shellUrl = HOST + "/terminal?token=" + response.data.token;
                 window.open(shellUrl, "_blank");
@@ -50,7 +48,11 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
                 $log.error(response.data.message);
             }
         }, function (response) {
-            $scope.error(response);
+            if (response.data.message) {
+                $scope.error(response.data.message);
+            } else {
+                $scope.error(response);
+            }
             $log.error(response)
         });
     };
@@ -84,13 +86,12 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
             $scope.msg = "Name already exist.";
             return;
         }
+
         if ($scope.item.type === "config") {
             if (!$scope.item.kubeConfig) {
                 $scope.msg = "Kube config is required.";
                 return;
             }
-            delete $scope.item.apiServer;
-            delete $scope.item.token;
         }
 
         if ($scope.item.type === "token") {
@@ -102,8 +103,9 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
                 $scope.msg = "Token is required.";
                 return;
             }
-            delete $scope.item.kubeConfig;
         }
+
+        $scope.item.key = PREFIX + $scope.item.name;
         localStorage.setItem($scope.item.key, angular.toJson($scope.item));
 
         // clear
