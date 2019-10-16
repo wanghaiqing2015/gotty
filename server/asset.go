@@ -93,7 +93,7 @@ func staticCssIndexLibCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/index-lib.css", size: 30, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/css/index-lib.css", size: 30, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -113,7 +113,7 @@ func staticCssIndexCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/index.css", size: 0, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/css/index.css", size: 0, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -133,7 +133,7 @@ func staticCssTerminalCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/terminal.css", size: 116, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/css/terminal.css", size: 116, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -153,7 +153,7 @@ func staticCssXtermCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/xterm.css", size: 35782, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/css/xterm.css", size: 35782, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -173,7 +173,7 @@ func staticCssXterm_customizeCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/xterm_customize.css", size: 550, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/css/xterm_customize.css", size: 550, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -193,12 +193,12 @@ func staticFaviconPng() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/favicon.png", size: 863, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/favicon.png", size: 863, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
-var _staticIndexHtml = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x9c\x91\xbf\x4e\xc3\x40\x0c\xc6\xf7\x3c\x85\xb9\x9d\xf8\x05\x9c\x5b\x80\x19\x06\x24\xc4\x98\x5c\xdc\xc6\xad\x73\x8d\xce\x06\x91\xb7\x47\xe5\xf8\x57\x60\x40\x9d\x4e\xb2\xbf\xdf\x77\xd2\xcf\x74\x71\x7d\x7b\x75\xff\x78\x77\x03\x93\xcf\x1a\x1b\xfa\x78\xb8\x1f\x63\x03\x00\x40\x2e\xae\x1c\x1f\x78\xd8\x3f\x0d\x9c\x5c\x09\xeb\xa4\x6e\x55\xf2\x1e\x0a\x6b\x17\x24\x1d\x72\x00\x5f\x17\xee\x82\xcc\xfd\x96\x71\xc9\xdb\x00\x53\xe1\x4d\x17\x5a\x74\x2e\xb3\xe4\x5e\x71\xd3\x3f\x1f\xa3\xed\x71\xfb\xab\xc4\x7c\x55\xb6\x89\xd9\xff\x20\x93\x19\x4a\x1e\xf9\xe5\x52\x65\x68\x93\x59\x00\x3c\xb3\xe1\x94\xb6\x54\x64\x71\xb0\x92\x4e\xd2\xbb\xef\xdf\xed\x2c\x44\xc2\x9a\xfc\x1f\xf6\x03\x21\xac\x52\xdf\x85\x7e\x6a\xa4\xe1\x30\xae\xb1\xf9\x12\xdc\x10\xd6\x11\xe1\xdb\x35\x5e\x03\x00\x00\xff\xff\x76\x8d\xcc\xc6\xa4\x01\x00\x00")
+var _staticIndexHtml = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x9c\x91\x3d\x4f\xc3\x30\x10\x86\xf7\xfc\x8a\xe3\xf6\xc4\x2b\x12\xb6\x97\x02\x2b\x0c\x41\x88\xd1\x71\xae\x8d\x5b\xc7\x31\xf6\xb5\x6a\xfe\x3d\x0a\x2e\x1f\x05\x06\xd4\xc9\xf2\xdd\xfb\x3e\x96\xfc\xc8\xab\xdb\x87\x55\xfb\xf2\x78\x07\x03\x8f\x5e\x57\xf2\xe3\x20\xd3\xeb\x0a\x00\x40\xb2\x63\x4f\xfa\x99\xba\xdd\xbe\x23\xcb\x5e\x8a\x32\x29\xdb\x91\xd8\xc0\xc0\x1c\x6b\x7a\xdd\xbb\x83\xc2\xd5\x14\x98\x02\xd7\xed\x1c\x09\xc1\x96\x9b\x42\xa6\x23\x8b\x05\x7e\x03\x76\x30\x29\x13\xab\xa7\xf6\xbe\xbe\xc6\x13\xc7\xbb\xb0\x83\x44\x5e\xa1\xb3\x53\x40\xe0\x39\x92\x42\x37\x9a\x0d\x89\x18\x36\x08\x43\xa2\xb5\xc2\x46\x30\xa5\xd1\x05\xe3\xc5\xda\x1c\x96\x68\xb3\x6c\x7f\x41\x32\xcf\x9e\xf2\x40\xc4\x7f\x34\x6d\xce\xc2\x85\x9e\x8e\xb5\x77\x5d\x63\x73\x46\x10\x17\x12\xce\xdb\xd9\x26\x17\x19\x72\xb2\x67\xe9\xed\xf7\xe7\xb6\x19\xb5\x14\x25\xf9\xbf\xda\x8f\x8a\x14\x45\xce\x49\xcc\xa7\x0e\xd9\x4d\xfd\xac\xab\x2f\x51\x95\x14\x65\x24\xdf\x3f\x5e\xbf\x05\x00\x00\xff\xff\x92\xfd\x74\xab\xec\x01\x00\x00")
 
 func staticIndexHtmlBytes() ([]byte, error) {
 	return bindataRead(
@@ -213,7 +213,7 @@ func staticIndexHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/index.html", size: 420, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/index.html", size: 492, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -233,7 +233,7 @@ func staticJsGottyBundleJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/js/gotty-bundle.js", size: 332393, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/js/gotty-bundle.js", size: 332393, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -253,7 +253,7 @@ func staticJsIndexLibJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/js/index-lib.js", size: 14, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/js/index-lib.js", size: 14, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -273,7 +273,7 @@ func staticJsIndexJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/js/index.js", size: 0, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/js/index.js", size: 0, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -293,7 +293,7 @@ func staticTerminalHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/terminal.html", size: 494, mode: os.FileMode(420), modTime: time.Unix(1571194848, 0)}
+	info := bindataFileInfo{name: "static/terminal.html", size: 494, mode: os.FileMode(420), modTime: time.Unix(1571194955, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
