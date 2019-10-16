@@ -29,18 +29,18 @@ type Server struct {
 	factory Factory
 	options *Options
 
-	upgrader      *websocket.Upgrader
-	indexTemplate *template.Template
-	mainTemplate  *template.Template
-	titleTemplate *noesctmpl.Template
+	upgrader         *websocket.Upgrader
+	terminalTemplate *template.Template
+	indexTemplate    *template.Template
+	titleTemplate    *noesctmpl.Template
 }
 
 // New creates a new instance of Server.
 // Server will use the New() of the factory provided to handle each request.
 func New(factory Factory, options *Options) (*Server, error) {
-	indexData, err := Asset("static/index.html")
+	indexData, err := Asset("static/terminal.html")
 	if err != nil {
-		panic("index not found") // must be in bindata
+		panic("terminal not found") // must be in bindata
 	}
 	if options.IndexFile != "" {
 		path := homedir.Expand(options.IndexFile)
@@ -49,18 +49,18 @@ func New(factory Factory, options *Options) (*Server, error) {
 			return nil, errors.Wrapf(err, "failed to read custom index file at `%s`", path)
 		}
 	}
-	indexTemplate, err := template.New("index").Parse(string(indexData))
+	terminalTemplate, err := template.New("index").Parse(string(indexData))
 	if err != nil {
 		panic("index template parse failed") // must be valid
 	}
 
-	mainData, err := Asset("static/main.html")
+	mainData, err := Asset("static/index.html")
 	if err != nil {
-		panic("main not found") // must be in bindata
+		panic("index not found") // must be in bindata
 	}
-	mainTemplate, err := template.New("main").Parse(string(mainData))
+	indexTemplate, err := template.New("main").Parse(string(mainData))
 	if err != nil {
-		panic("main template parse failed") // must be valid
+		panic("index template parse failed") // must be valid
 	}
 
 	titleTemplate, err := noesctmpl.New("title").Parse(options.TitleFormat)
@@ -89,9 +89,9 @@ func New(factory Factory, options *Options) (*Server, error) {
 			Subprotocols:    webtty.Protocols,
 			CheckOrigin:     originChekcer,
 		},
-		indexTemplate: indexTemplate,
-		mainTemplate:  mainTemplate,
-		titleTemplate: titleTemplate,
+		terminalTemplate: terminalTemplate,
+		indexTemplate:    indexTemplate,
+		titleTemplate:    titleTemplate,
 	}, nil
 }
 

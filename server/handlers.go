@@ -224,7 +224,7 @@ func (server *Server) handleIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	indexBuf := new(bytes.Buffer)
-	err = server.indexTemplate.Execute(indexBuf, indexVars)
+	err = server.terminalTemplate.Execute(indexBuf, indexVars)
 	if err != nil {
 		http.Error(w, "Internal Server Error", 500)
 		return
@@ -244,7 +244,7 @@ func (server *Server) handleMain(w http.ResponseWriter, r *http.Request) {
 	}
 
 	indexBuf := new(bytes.Buffer)
-	err := server.mainTemplate.Execute(indexBuf, indexVars)
+	err := server.indexTemplate.Execute(indexBuf, indexVars)
 	if err != nil {
 		http.Error(w, "Internal Server Error", 500)
 		return

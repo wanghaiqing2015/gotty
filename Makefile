@@ -7,7 +7,7 @@ gotty: main.go server/*.go webtty/*.go backend/*.go Makefile
 	godep go build ${BUILD_OPTIONS}
 
 .PHONY: asset
-asset: bindata/static/js/gotty-bundle.js bindata/static/index.html bindata/static/main.html bindata/static/css/main.css bindata/static/js/main.js bindata/static/favicon.png bindata/static/css/index.css bindata/static/css/xterm.css bindata/static/css/xterm_customize.css
+asset: bindata/static/js/gotty-bundle.js bindata/static/terminal.html bindata/static/index.html bindata/static/css/index.css bindata/static/css/index-lib.css bindata/static/js/index.js bindata/static/js/index-lib.js bindata/static/favicon.png bindata/static/css/terminal.css bindata/static/css/xterm.css bindata/static/css/xterm_customize.css
 	go-bindata -prefix bindata -pkg server -ignore=\\.gitkeep -o server/asset.go bindata/...
 	gofmt -w server/asset.go
 
@@ -20,11 +20,11 @@ bindata:
 bindata/static: bindata
 	mkdir bindata/static
 
+bindata/static/terminal.html: bindata/static resources/terminal.html
+	cp resources/terminal.html bindata/static/terminal.html
+
 bindata/static/index.html: bindata/static resources/index.html
 	cp resources/index.html bindata/static/index.html
-
-bindata/static/main.html: bindata/static resources/main.html
-	cp resources/main.html bindata/static/main.html
 
 bindata/static/favicon.png: bindata/static resources/favicon.png
 	cp resources/favicon.png bindata/static/favicon.png
@@ -36,17 +36,23 @@ bindata/static/js: bindata/static
 bindata/static/js/gotty-bundle.js: bindata/static/js js/dist/gotty-bundle.js
 	cp js/dist/gotty-bundle.js bindata/static/js/gotty-bundle.js
 
-bindata/static/js/main.js: bindata/static/js resources/main.js
-	cp resources/main.js bindata/static/js/main.js
+bindata/static/js/index.js: bindata/static/js resources/index.js
+	cp resources/index.js bindata/static/js/index.js
+
+bindata/static/js/index-lib.js: bindata/static/js resources/index-lib.js
+	cp resources/index-lib.js bindata/static/js/index-lib.js
 
 bindata/static/css: bindata/static
 	mkdir -p bindata/static/css
 
+bindata/static/css/terminal.css: bindata/static/css resources/terminal.css
+	cp resources/terminal.css bindata/static/css/terminal.css
+
 bindata/static/css/index.css: bindata/static/css resources/index.css
 	cp resources/index.css bindata/static/css/index.css
 
-bindata/static/css/main.css: bindata/static/css resources/main.css
-	cp resources/main.css bindata/static/css/main.css
+bindata/static/css/index-lib.css: bindata/static/css resources/index-lib.css
+	cp resources/index-lib.css bindata/static/css/index-lib.css
 
 bindata/static/css/xterm_customize.css: bindata/static/css resources/xterm_customize.css
 	cp resources/xterm_customize.css bindata/static/css/xterm_customize.css
