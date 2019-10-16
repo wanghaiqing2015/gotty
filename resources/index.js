@@ -35,13 +35,12 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
     };
 
     $scope.connect = function (item) {
-        const HOST = "http://127.0.0.1:8080";
-        const CONFIG_URL = HOST + "/api/kube-config";
-        const TOKEN_URL = HOST + "/api/kube-token";
+        const CONFIG_URL = "api/kube-config";
+        const TOKEN_URL = "api/kube-token";
         let url = item.type === "config" ? CONFIG_URL : TOKEN_URL;
         return $http.post(url, item).then(function (response) {
             if (response.data.success) {
-                let shellUrl = HOST + "/terminal?token=" + response.data.token;
+                let shellUrl = "terminal?token=" + response.data.token;
                 window.open(shellUrl, "_blank");
             } else {
                 $scope.error(response.data.message);
