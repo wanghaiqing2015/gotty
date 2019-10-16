@@ -130,10 +130,10 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 		cachedKey := params.Get("token")
 		if found {
 
-			kubeConfigRequest, ok := cachedObject.(KubeConfigRequest)
+			ttyParameter, ok := cachedObject.(TtyParameter)
 			if ok {
-				windowTitle = kubeConfigRequest.Name
-				params.Set("arg", kubeConfigRequest.KubeConfig)
+				windowTitle = ttyParameter.Title
+				params.Set("arg", ttyParameter.Arg)
 			} else {
 				return errors.Wrapf(err, "Internal Error")
 			}
@@ -306,22 +306,80 @@ func (server *Server) handleKubeConfigApi(w http.ResponseWriter, r *http.Request
 		w.WriteHeader(406)
 		return
 	}
-	var requst KubeConfigRequest
-	if err = json.Unmarshal(body, &requst); err != nil {
+	var request KubeConfigRequest
+	if err = json.Unmarshal(body, &request); err != nil {
 		fmt.Printf("Unmarshal err, %v\n", err)
 		result.Message = "Invalid Request Body"
 		json.NewEncoder(w).Encode(result)
 		w.WriteHeader(406)
 		return
 	}
+	if len(request.KubeConfig) < 10 {
+		result.Message = "Invalid Kube Config"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(406)
+		return
+	}
 	//fmt.Printf("%+v", requst)
 	token := randomstring.Generate(30)
-	tokenCache.Add(token, requst, cache.DefaultExpiration)
+	ttyParameter := TtyParameter{
+		Title: request.Name,
+		Arg:   request.KubeConfig,
+	}
+	tokenCache.Add(token, ttyParameter, cache.DefaultExpiration)
 	result.Success = true
 	result.Token = token
 	json.NewEncoder(w).Encode(result)
 }
 
 func (server *Server) handleKubeTokenApi(w http.ResponseWriter, r *http.Request) {
-	// TODO
+	result := ApiResponse{
+		Success: false,
+	}
+	w.Header().Set("Content-Type", "application/json;charset=utf-8")
+	if !strings.EqualFold(r.Method, "POST") {
+		result.Message = "Method Not Allowed"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(405)
+		return
+	}
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Printf("read body err, %v\n", err)
+		result.Message = "Invalid Request Body"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(406)
+		return
+	}
+	var request KubeTokenRequest
+	if err = json.Unmarshal(body, &request); err != nil {
+		fmt.Printf("Unmarshal err, %v\n", err)
+		result.Message = "Invalid Request Body"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(406)
+		return
+	}
+	if !strings.HasPrefix(request.ApiServer, "http") {
+		result.Message = "Invalid ApiServer"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(406)
+		return
+	}
+
+	if len(request.Token) < 10 {
+		result.Message = "Invalid Bearer Token"
+		json.NewEncoder(w).Encode(result)
+		w.WriteHeader(406)
+		return
+	}
+	//fmt.Printf("%+v", requst)
+	token := randomstring.Generate(30)
+	ttyParameter := TtyParameter{
+		Title: request.Name,
+		Arg:   request.ApiServer + " " + request.Token,
+	}
+	tokenCache.Add(token, ttyParameter, cache.DefaultExpiration)
+	result.Success = true
+	result.Token = token
+	json.NewEncoder(w).Encode(result)
 }
