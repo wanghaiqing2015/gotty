@@ -211,7 +211,7 @@ func (server *Server) setupHandlers(ctx context.Context, cancel context.CancelFu
 	siteMux.HandleFunc(pathPrefix+"auth_token.js", server.handleAuthToken)
 	siteMux.HandleFunc(pathPrefix+"config.js", server.handleConfig)
 	siteMux.HandleFunc("/api/kube-config", server.handleKubeConfigApi)
-	siteMux.HandleFunc("/api/kube-token", server.handleKubeConfigApi)
+	siteMux.HandleFunc("/api/kube-token", server.handleKubeTokenApi)
 	if len(os.Getenv("TERMINAL_PATH")) < 1 {
 		siteMux.HandleFunc("/", server.handleMain)
 	}
