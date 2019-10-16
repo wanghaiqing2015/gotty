@@ -144,7 +144,7 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 	} else {
 		arg = "ERROR:No Token Provided"
 	}
-	params.Set("arg", arg)
+	params.Add("arg", arg)
 	log.Println("arg: " + arg)
 	var slave Slave
 	slave, err = server.factory.New(params)
@@ -315,7 +315,7 @@ func (server *Server) handleKubeConfigApi(w http.ResponseWriter, r *http.Request
 	token := randomstring.Generate(20)
 	ttyParameter := TtyParameter{
 		Title: request.Name,
-		Arg:   request.KubeConfig,
+		Arg:   strings.Replace(request.KubeConfig, " ", "", -1),
 	}
 	tokenCache.Add(token, ttyParameter, cache.DefaultExpiration)
 	result.Success = true
@@ -367,7 +367,7 @@ func (server *Server) handleKubeTokenApi(w http.ResponseWriter, r *http.Request)
 	token := randomstring.Generate(20)
 	ttyParameter := TtyParameter{
 		Title: request.Name,
-		Arg:   request.ApiServer + " " + request.Token,
+		Arg:   strings.Replace(request.ApiServer, " ", "", -1) + " " + strings.Replace(request.Token, " ", "", -1),
 	}
 	tokenCache.Add(token, ttyParameter, cache.DefaultExpiration)
 	result.Success = true
