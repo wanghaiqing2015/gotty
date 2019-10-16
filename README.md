@@ -8,3 +8,7 @@
 ### This project is used in [https://github.com/webkubectl/webkubectl](https://github.com/webkubectl/webkubectl/blob/master/Dockerfile#L9)  to run a JavaScript based terminal on web browsers
 
 ### And it's forked from [https://github.com/yudai/gotty](https://github.com/yudai/gotty), thanks [Iwasaki Yudai](https://github.com/yudai/gotty).
+
+### Main change
+-  **Add API**
+-  **Add new index page**
