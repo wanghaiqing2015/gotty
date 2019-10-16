@@ -136,14 +136,14 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 				windowTitle = ttyParameter.Title
 				arg = ttyParameter.Arg
 			} else {
-				arg = "e e e e 'Internal Error'"
+				arg = "\"ERROR:Internal Error\""
 			}
 			tokenCache.Delete(cachedKey)
 		} else {
-			arg = "e e e e 'Invalid Token'"
+			arg = "\"ERROR:Invalid Token\""
 		}
 	} else {
-		arg = "e e e e 'No Token Provided'"
+		arg = "\"ERROR:No Token Provided\" "
 	}
 	params.Set("arg", arg)
 	var slave Slave
@@ -323,7 +323,7 @@ func (server *Server) handleKubeConfigApi(w http.ResponseWriter, r *http.Request
 		return
 	}
 	//fmt.Printf("%+v", requst)
-	token := randomstring.Generate(30)
+	token := randomstring.Generate(20)
 	ttyParameter := TtyParameter{
 		Title: request.Name,
 		Arg:   request.KubeConfig,
@@ -375,7 +375,7 @@ func (server *Server) handleKubeTokenApi(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	//fmt.Printf("%+v", requst)
-	token := randomstring.Generate(30)
+	token := randomstring.Generate(20)
 	ttyParameter := TtyParameter{
 		Title: request.Name,
 		Arg:   request.ApiServer + " " + request.Token,

@@ -38,6 +38,7 @@ type Server struct {
 // New creates a new instance of Server.
 // Server will use the New() of the factory provided to handle each request.
 func New(factory Factory, options *Options) (*Server, error) {
+
 	indexData, err := Asset("static/terminal.html")
 	if err != nil {
 		panic("terminal not found") // must be in bindata
