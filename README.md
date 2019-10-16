@@ -1,7 +1,7 @@
 # ![](https://raw.githubusercontent.com/webkubectl/gotty/master/resources/favicon.png) GoTTY - Share your terminal as a web application
 
 ![Powered By](https://img.shields.io/badge/Powered%20By-FIT2CLOUD-blueviolet)
-![License](https://img.shields.io/badge/License-MIT2.0-red)
+![License](https://img.shields.io/badge/License-MIT-red)
 ![Golang](https://img.shields.io/badge/golang-1.12-brightgreen)
 ![Total visitor](https://visitor-count-badge.herokuapp.com/total.svg?repo_id=webkubectl-gotty)
 ![Visitors in today](https://visitor-count-badge.herokuapp.com/today.svg?repo_id=webkubectl-gotty)
