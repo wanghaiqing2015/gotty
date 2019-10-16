@@ -50,34 +50,32 @@
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="radio_config" name="type" class="custom-control-input"
-                                   value="config"
-                                   ng-model="item.type" ng-check="true">
+                                   value="Kube Config" ng-model="item.type" ng-check="true">
                             <label class="custom-control-label" for="radio_config">Kube Config</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="radio_token" name="type" class="custom-control-input" value="token"
-                                   ng-model="item.type">
+                            <input type="radio" id="radio_token" name="type" class="custom-control-input"
+                                   value="Token" ng-model="item.type">
                             <label class="custom-control-label" for="radio_token">Token</label>
                         </div>
-
 
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" ng-model="item.name"
                                    placeholder="Enter name">
                         </div>
-                        <div class="form-group" ng-show="item.type == 'token'">
+                        <div class="form-group" ng-show="item.type == 'Token'">
                             <label for="apiserver">ApiServer</label>
                             <input type="text" class="form-control" id="apiserver" ng-model="item.apiServer"
                                    placeholder="Enter apiserver">
                         </div>
-                        <div class="form-group" ng-show="item.type == 'token'">
+                        <div class="form-group" ng-show="item.type == 'Token'">
                             <label for="token">Token</label>
                             <input type="text" class="form-control" id="token" ng-model="item.token"
                                    placeholder="Enter token">
                         </div>
 
-                        <div class="input-group" ng-show="item.type =='config'">
+                        <div class="input-group" ng-show="item.type == 'Kube Config'">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="file">
                                 <label class="custom-file-label" for="file" data-browse="Upload">Upload a kube
@@ -91,7 +89,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" ng-click="submit()">Submit</button>
+                    <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
                 </div>
             </div>
         </div>

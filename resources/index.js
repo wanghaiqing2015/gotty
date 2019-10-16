@@ -3,6 +3,8 @@ let App = angular.module('App', []);
 App.controller('IndexCtrl', function ($scope, $http, $log) {
 
     const PREFIX = "@WK@_";
+    const TYPE_KUBE_CONFIG = "Kube Config";
+    const TYPE_TOKEN = "Token";
 
     let file = $("#file");
 
@@ -10,7 +12,7 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         $(".custom-file-label").text("Upload a kube config");
         $scope.msg = "";
         $scope.item = {
-            type: "config"
+            type: TYPE_KUBE_CONFIG
         };
     };
 
@@ -37,7 +39,7 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
     $scope.connect = function (item) {
         const CONFIG_URL = "api/kube-config";
         const TOKEN_URL = "api/kube-token";
-        let url = item.type === "config" ? CONFIG_URL : TOKEN_URL;
+        let url = item.type === TYPE_KUBE_CONFIG ? CONFIG_URL : TOKEN_URL;
         return $http.post(url, item).then(function (response) {
             if (response.data.success) {
                 let shellUrl = "terminal?token=" + response.data.token;
@@ -75,7 +77,7 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         $(".clearfix").after(html);
     };
 
-    $scope.submit = function () {
+    $scope.save = function () {
         if (!$scope.item.name) {
             $scope.msg = "Name is required.";
             return;
@@ -86,14 +88,14 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
             return;
         }
 
-        if ($scope.item.type === "config") {
+        if ($scope.item.type === TYPE_KUBE_CONFIG) {
             if (!$scope.item.kubeConfig) {
                 $scope.msg = "Kube config is required.";
                 return;
             }
         }
 
-        if ($scope.item.type === "token") {
+        if ($scope.item.type === TYPE_TOKEN) {
             if (!$scope.item.apiServer) {
                 $scope.msg = "ApiServer is required.";
                 return;
