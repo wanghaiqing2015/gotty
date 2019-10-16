@@ -125,6 +125,7 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 	windowTitle := ""
 	params := query.Query()
 	params.Del("arg")
+	arg := ""
 	if len(params.Get("token")) > 0 {
 		cachedObject, found := tokenCache.Get(params.Get("token"))
 		cachedKey := params.Get("token")
@@ -133,17 +134,18 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 			ttyParameter, ok := cachedObject.(TtyParameter)
 			if ok {
 				windowTitle = ttyParameter.Title
-				params.Set("arg", ttyParameter.Arg)
+				arg = ttyParameter.Arg
 			} else {
-				return errors.Wrapf(err, "Internal Error")
+				arg = "e e e e 'Internal Error'"
 			}
 			tokenCache.Delete(cachedKey)
 		} else {
-			return errors.Wrapf(err, "Invalid Token")
+			arg = "e e e e 'Invalid Token'"
 		}
 	} else {
-		return errors.New("No token provided")
+		arg = "e e e e 'No Token Provided'"
 	}
+	params.Set("arg", arg)
 	var slave Slave
 	slave, err = server.factory.New(params)
 	if err != nil {
