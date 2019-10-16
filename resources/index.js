@@ -6,9 +6,9 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
     const TYPE_KUBE_CONFIG = "Kube Config";
     const TYPE_TOKEN = "Token";
 
-    let file = $("#file");
 
     $scope.reset = function () {
+        $("#file").val("");
         $(".custom-file-label").text("Upload a kube config");
         $scope.msg = "";
         $scope.item = {
@@ -16,7 +16,7 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         };
     };
 
-    file.bind('change', function (e) {
+    $("#file").bind('change', function (e) {
         let f = e.target.files[0];
         let reader = new FileReader();
         reader.readAsText(f || "");
