@@ -135,14 +135,14 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 				windowTitle = ttyParameter.Title
 				arg = ttyParameter.Arg
 			} else {
-				arg = "\"ERROR:Internal Error\""
+				arg = "ERROR:Internal Error"
 			}
 			tokenCache.Delete(cachedKey)
 		} else {
-			arg = "\"ERROR:Invalid Token\""
+			arg = "ERROR:Invalid Token"
 		}
 	} else {
-		arg = "\"ERROR:No Token Provided\" "
+		arg = "ERROR:No Token Provided"
 	}
 	params.Set("arg", arg)
 	var slave Slave
