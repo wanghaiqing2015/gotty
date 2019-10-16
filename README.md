@@ -5,4 +5,6 @@
 ![Total visitor](https://visitor-count-badge.herokuapp.com/total.svg?repo_id=webkubectl-gotty)
 ![Visitors in today](https://visitor-count-badge.herokuapp.com/today.svg?repo_id=webkubectl-gotty)
 
-### This is repo is forked from [https://github.com/yudai/gotty](https://github.com/yudai/gotty), thanks [Iwasaki Yudai](https://github.com/yudai/gotty)
+### This project is used in [https://github.com/webkubectl/webkubectl](https://github.com/webkubectl/webkubectl/blob/master/Dockerfile#L9)  to run a JavaScript based terminal on web browsers
+
+### And it's forked from [https://github.com/yudai/gotty](https://github.com/yudai/gotty), thanks [Iwasaki Yudai](https://github.com/yudai/gotty).
