@@ -31,7 +31,6 @@ type Server struct {
 
 	upgrader         *websocket.Upgrader
 	terminalTemplate *template.Template
-	indexTemplate    *template.Template
 	titleTemplate    *noesctmpl.Template
 }
 
@@ -51,15 +50,6 @@ func New(factory Factory, options *Options) (*Server, error) {
 		}
 	}
 	terminalTemplate, err := template.New("index").Parse(string(indexData))
-	if err != nil {
-		panic("index template parse failed") // must be valid
-	}
-
-	mainData, err := Asset("static/index.html")
-	if err != nil {
-		panic("index not found") // must be in bindata
-	}
-	indexTemplate, err := template.New("main").Parse(string(mainData))
 	if err != nil {
 		panic("index template parse failed") // must be valid
 	}
@@ -91,7 +81,6 @@ func New(factory Factory, options *Options) (*Server, error) {
 			CheckOrigin:     originChekcer,
 		},
 		terminalTemplate: terminalTemplate,
-		indexTemplate:    indexTemplate,
 		titleTemplate:    titleTemplate,
 	}, nil
 }

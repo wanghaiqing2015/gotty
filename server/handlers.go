@@ -11,7 +11,6 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -236,23 +235,12 @@ func (server *Server) handleIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func (server *Server) handleMain(w http.ResponseWriter, r *http.Request) {
-	path := "/terminal/"
-	customPath := os.Getenv("TERMINAL_PATH")
-	if len(customPath) > 0 {
-		path = customPath
-	}
-	indexVars := map[string]interface{}{
-		"terminal_path": path,
-	}
-
-	indexBuf := new(bytes.Buffer)
-	err := server.indexTemplate.Execute(indexBuf, indexVars)
+	indexData, err := Asset("static/index.html")
 	if err != nil {
-		http.Error(w, "Internal Server Error", 500)
-		return
+		panic("index not found") // must be in bindata
 	}
 
-	w.Write(indexBuf.Bytes())
+	w.Write(indexData)
 }
 
 func (server *Server) handleAuthToken(w http.ResponseWriter, r *http.Request) {
