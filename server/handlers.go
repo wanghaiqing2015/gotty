@@ -145,6 +145,7 @@ func (server *Server) processWSConn(ctx context.Context, conn *websocket.Conn) e
 		arg = "ERROR:No Token Provided"
 	}
 	params.Set("arg", arg)
+	log.Println("arg: " + arg)
 	var slave Slave
 	slave, err = server.factory.New(params)
 	if err != nil {
