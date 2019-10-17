@@ -20,18 +20,20 @@
             <h6 class="card-title">Sessions</h6>
             <div class="list-group list-group-flush">
                 <div class="list-group-item" ng-repeat="item in items">
-                    <div class="d-flex w-100 justify-content-between small">
-                        <strong class="text-gray-dark" ng-bind="item.name"></strong>
-                        <small class="text-muted">
-                            <button class="btn btn-link btn-sm" ng-click="connect(item)">connect</button>
-                            <button class="btn btn-link btn-sm" ng-click="delete(item)">delete</button>
-                        </small>
+                    <div class="d-flex flex-row justify-content-between">
+                        <div class="d-flex flex-column small">
+                            <strong class="text-gray-dark" ng-bind="item.name"></strong>
+                            <small ng-bind="item.type"></small>
+                        </div>
+                        <div class="d-flex flex-row align-items-center">
+                            <button class="btn btn-success btn-sm" ng-click="connect(item)">Connect</button>
+                            <button class="ml-2 btn btn-secondary btn-sm" ng-click="delete(item)">Delete</button>
+                        </div>
                     </div>
-                    <div class="small" ng-bind="item.type"></div>
                 </div>
             </div>
             <div class="float-right mt-3">
-                <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#add">new session</button>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add">New Session</button>
             </div>
             <div class="clearfix"></div>
         </div>
