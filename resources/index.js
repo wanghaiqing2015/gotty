@@ -42,7 +42,7 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         let url = item.type === TYPE_KUBE_CONFIG ? CONFIG_URL : TOKEN_URL;
         return $http.post(url, item).then(function (response) {
             if (response.data.success) {
-                let shellUrl = "terminal?token=" + response.data.token;
+                let shellUrl = location.pathname + "terminal?token=" + response.data.token;
                 window.open(shellUrl, "_blank");
             } else {
                 $scope.error(response.data.message);
