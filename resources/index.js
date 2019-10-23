@@ -20,9 +20,10 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         let f = e.target.files[0];
         let reader = new FileReader();
         reader.readAsText(f || "");
-        reader.onload = function () {
+        reader.onload = function (a) {
+            console.log(e)
             $(".custom-file-label").text(f.name);
-            $scope.item.kubeConfig = window.btoa(this.result);
+            $scope.item.kubeConfig = window.btoa(unescape(encodeURIComponent(this.result)));
         }
     });
 
@@ -110,9 +111,9 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         localStorage.setItem($scope.item.key, angular.toJson($scope.item));
 
         // clear
-        $('#add').modal('hide');
         $scope.reset();
         $scope.list();
+        $('#add').modal('hide');
     };
 
     $scope.reset();
