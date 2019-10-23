@@ -93,7 +93,7 @@ func staticCssIndexLibCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/index-lib.css", size: 155758, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/css/index-lib.css", size: 155758, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -113,7 +113,7 @@ func staticCssIndexCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/index.css", size: 106, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/css/index.css", size: 106, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -133,7 +133,7 @@ func staticCssTerminalCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/terminal.css", size: 116, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/css/terminal.css", size: 116, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -153,12 +153,12 @@ func staticCssXtermCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/xterm.css", size: 35782, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/css/xterm.css", size: 35782, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
-var _staticCssXterm_customizeCss = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\xbc\x8e\x41\x6b\xe3\x30\x10\x85\xef\xfe\x15\x83\x21\xb0\x0b\x96\x71\x16\xcc\x2e\xca\x69\xa1\xed\x2d\xa7\x94\xde\xc7\xf6\x38\x55\x23\xcd\x08\x49\x4e\xed\x96\xfc\xf7\xe2\xda\x69\xf3\x0b\x7a\x19\xde\x1b\x3d\xbd\x6f\xca\x44\xc1\x19\x46\x0b\xef\x19\x00\x40\x2f\x9c\x54\x8f\xce\xd8\x49\x43\x7e\x47\x2f\xf8\x34\xc0\x01\x39\xc2\x5e\x58\xf2\x02\xf2\xfb\x33\x85\x28\x7c\xf5\x0f\x81\x68\x96\x05\xec\x89\xad\x14\xf0\xb8\x16\x16\xe0\x84\x25\x7a\x6c\xa9\x80\xfc\xbf\xf7\x96\xe0\x30\xb9\x46\x6c\xcc\x77\xd9\x25\xcb\xca\x71\x66\x2b\x39\x53\xb0\x38\xfd\x30\x7f\x66\x35\x12\x3a\x0a\x2a\x60\x67\x86\xa8\x61\x5b\xfb\x71\xf7\x7d\x44\x34\x6f\xa4\x61\x1c\x95\xc5\x70\xa4\xe5\xa1\x15\x2b\x41\x43\x63\xb1\x3d\xad\x1d\xd8\x9e\x8e\x41\x06\xee\x34\xbc\x3e\x9b\xb4\x06\xc5\x63\x6b\xd2\xa4\xa1\x2a\xff\xd6\xcb\xca\x63\xd7\x19\x3e\xce\xab\x3f\xe4\xa0\x2a\xeb\xcf\xf9\xa5\xd7\x94\x44\x93\x8c\xb0\x06\x6c\xa2\xd8\xe1\x5a\x98\xc4\x6b\xa8\xab\xcd\xe2\x2c\xf5\xe9\xc6\xa6\x80\x1c\x7b\x09\x4e\x2f\xd2\x62\xa2\x5f\xaa\xae\x36\x05\xcc\xf3\xf7\x92\x1a\x22\x05\x15\xc9\x52\x9b\x34\xb0\x30\xdd\x7c\x5e\x99\xeb\xd9\xb0\xfd\x57\xb9\x08\x84\x91\x94\xe1\x5d\x76\xf9\x08\x00\x00\xff\xff\xa9\x5f\x6b\xf4\x26\x02\x00\x00")
+var _staticCssXterm_customizeCss = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\xc4\x91\xcf\x4e\xc3\x30\x0c\xc6\xef\x7b\x0a\xab\xd2\x24\xa8\xfa\x6f\x48\x15\x28\x3b\x21\x01\xb7\x9d\x86\xb8\xbb\xad\x3b\xc2\x52\xbb\x4a\xd2\xd1\x82\x78\x77\xd4\x31\xd6\xb2\x17\xe0\x62\x7d\xf9\xe2\x7c\xfe\x45\x4e\xc3\xc4\x93\x6d\x34\xa3\x81\xcf\x30\x5d\xa4\x21\x00\x40\x2d\xec\xe3\x1a\x1b\x6d\x06\x05\xc1\x03\xbd\xe1\x4b\x07\x5b\x64\x07\x1b\x61\x09\x22\x08\x1e\x0f\x64\x9d\xf0\xef\xf9\xc9\x12\x8d\x32\x82\x0d\xb1\x91\x08\x9e\x4f\xa1\x11\x34\xc2\xe2\x5a\x2c\x29\x82\xe0\xbe\x6d\x0d\xc1\x76\x68\x0a\x31\x2e\x58\x1f\xe7\x7d\x85\xe9\x62\x91\x86\x49\x3f\x72\xc4\x72\x20\x6b\x70\xf8\x27\x96\x71\x5e\x21\xb6\x22\x1b\x5b\xac\x74\xe7\x14\xac\xf2\xb6\x5f\xff\x85\x71\xfa\x83\x14\xf4\x7d\x6c\xd0\xee\x68\xba\x2c\xc5\x88\x55\x50\x18\x2c\xf7\xb3\x3c\x2c\xf7\x3b\x2b\x1d\x57\x0a\xde\x5f\xb5\x9f\x3d\x90\x16\x4b\xed\x07\x05\x59\x72\x9b\x4f\x76\x8b\x55\xa5\x79\x37\xda\x37\xd4\x40\x96\xe4\xc7\x7a\xd6\xb3\x4e\x71\xda\x6b\x61\x05\x58\x38\x31\xdd\x3c\xdc\x4b\xab\x20\xcf\x96\x93\x63\xa8\xf6\x17\x96\xb7\xc8\xae\x16\xdb\xa8\x1f\x69\xd0\xd3\x55\x9c\x67\xcb\x08\xc6\x7a\x3d\x75\x76\x8e\x6c\xec\xc8\x50\xe9\x15\xb0\x30\x5d\x84\x9c\x38\x4e\x5f\x82\xd5\x5d\xd6\x38\x20\x74\x14\x6b\x3e\x2f\xfa\x3b\x00\x00\xff\xff\x89\x58\x25\x7b\x6e\x02\x00\x00")
 
 func staticCssXterm_customizeCssBytes() ([]byte, error) {
 	return bindataRead(
@@ -173,7 +173,7 @@ func staticCssXterm_customizeCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/xterm_customize.css", size: 550, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/css/xterm_customize.css", size: 622, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -193,7 +193,7 @@ func staticFaviconPng() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/favicon.png", size: 863, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/favicon.png", size: 863, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -213,7 +213,7 @@ func staticIndexHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/index.html", size: 5236, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/index.html", size: 5236, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -233,7 +233,7 @@ func staticJsGottyBundleJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/js/gotty-bundle.js", size: 332389, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/js/gotty-bundle.js", size: 332389, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -253,7 +253,7 @@ func staticJsIndexLibJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/js/index-lib.js", size: 319919, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/js/index-lib.js", size: 319919, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -273,7 +273,7 @@ func staticJsIndexJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/js/index.js", size: 3748, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/js/index.js", size: 3748, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -293,7 +293,7 @@ func staticTerminalHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/terminal.html", size: 494, mode: os.FileMode(420), modTime: time.Unix(1571801461, 0)}
+	info := bindataFileInfo{name: "static/terminal.html", size: 494, mode: os.FileMode(420), modTime: time.Unix(1571803093, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
