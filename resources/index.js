@@ -22,7 +22,7 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         reader.readAsText(f || "");
         reader.onload = function () {
             $(".custom-file-label").text(f.name);
-            $scope.item.kubeConfig = window.btoa(this.result);
+            $scope.item.kubeConfig = window.btoa(unescape(encodeURIComponent(this.result)));
         }
     });
 
@@ -110,9 +110,9 @@ App.controller('IndexCtrl', function ($scope, $http, $log) {
         localStorage.setItem($scope.item.key, angular.toJson($scope.item));
 
         // clear
-        $('#add').modal('hide');
         $scope.reset();
         $scope.list();
+        $('#add').modal('hide');
     };
 
     $scope.reset();
