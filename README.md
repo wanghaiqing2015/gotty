@@ -3,8 +3,7 @@
 ![Powered By](https://img.shields.io/badge/Powered%20By-FIT2CLOUD-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-red)
 ![Golang](https://img.shields.io/badge/golang-1.12-brightgreen)
-![Total visitor](https://visitor-count-badge.herokuapp.com/total.svg?repo_id=webkubectl-gotty)
-![Visitors in today](https://visitor-count-badge.herokuapp.com/today.svg?repo_id=webkubectl-gotty)
+![HitCount](http://hits.dwyl.io/webkubectl/webkubectl.svg)
 
 ### This project is used in [https://github.com/webkubectl/webkubectl](https://github.com/webkubectl/webkubectl/blob/master/Dockerfile#L9)  to run a JavaScript based terminal on web browsers
 
